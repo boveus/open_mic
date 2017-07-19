@@ -36,6 +36,16 @@ class UserTest < Minitest::Test
 
     assert_equal 1, sal.jokes.count
   end
+
+  def test_user_can_tell_another_user_a_joke
+    sal = User.new("Sal")
+    joke = Joke.new({id: 1, question: "Why did the strawberry cross the road?", answer: "Because his mother was in a jam."})
+    sal.learn(joke)
+    ali = User.new("Ali")
+    sal.tell(ali, joke)
+
+    assert_equal 1, ali.jokes.count
+  end
 end
 
 
@@ -51,9 +61,12 @@ end
 # > sal = User.new("Sal")
 # # => #<User:0x007fc87c8f8aa8 ...>
 #
-# > sal.jokes
-# # => []
+# > ali = User.new("Ali")
+# # => #<User:0x007fc87cabfbe8 ...>
 #
-# > sal.learn(joke)
-# > sal.jokes
+# > sal.tell(ali, joke)
+# > ali.jokes
 # # => [#<Joke:0x007fc87b02c2e0 ...>]
+#
+# > ali.jokes.count
+# # => 1
