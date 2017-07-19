@@ -14,4 +14,10 @@ class User
   def tell(user, joke)
     user.learn(joke)
   end
+
+  def perform_routine_for(user)
+    @jokes.each do |joke|
+      user.learn(joke)
+    end
+  end
 end
