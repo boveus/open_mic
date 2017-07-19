@@ -2,6 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/user'
+require './lib/joke'
 
 class UserTest < Minitest::Test
   def test_it_exists
@@ -21,4 +22,32 @@ class UserTest < Minitest::Test
 
     assert_equal "Ali", ali.name
   end
+
+  def test_user_has_no_jokes_by_default
+
+  end
+
+  def test_user_can_learn_a_joke
+
+  end
 end
+
+
+# > require './lib/joke'
+# # => true
+#
+# > joke = Joke.new({id: 1, question: "Why did the strawberry cross the road?", answer: "Because his mother was in a jam."})
+# # => #<Joke:0x007fc87b02c2e0 ...>
+#
+# > require './lib/user'
+# # => true
+#
+# > sal = User.new("Sal")
+# # => #<User:0x007fc87c8f8aa8 ...>
+#
+# > sal.jokes
+# # => []
+#
+# > sal.learn(joke)
+# > sal.jokes
+# # => [#<Joke:0x007fc87b02c2e0 ...>]
