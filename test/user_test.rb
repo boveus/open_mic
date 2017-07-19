@@ -59,32 +59,35 @@ class UserTest < Minitest::Test
     assert_equal 2, josh.jokes.count
   end
 
+  def test_user_can_learn_routine_with_single_joke
+    casey = User.new("Casey")
+    casey.learn_routine('./data/joke.csv')
+
+    assert_equal 1, casey.jokes.count
+  end
+
+  def test_user_can_learn_routine_with_two_jokes
+    casey = User.new("Casey")
+    casey.learn_routine('./data/jokes.csv')
+  end
+
+  def test_user_routine_jokes_are_properly_formatted
+    joke_1 = Joke.new({id: 1, question: "Why did the strawberry cross the road?", answer: "Because his mother was in a jam."})
+    joke_2 = Joke.new({id: 2, question: "How do you keep a lion from charging?", answer: "Take away its credit cards."})
+    casey = User.new("Casey")
+    casey.learn_routine('./data/jokes.csv')
+
+    assert_equal joke_1, casey.jokes[0]
+    assert_equal joke_2, casey.jokes[1]
+  end
 end
 
-#
-# > require './lib/joke'
-# # => true
-#
-# > joke_1 = Joke.new({id: 1, question: "Why did the strawberry cross the road?", answer: "Because his mother was in a jam."})
-# # => #<Joke:0x007fc87b02c2e0 ...>
-#
-# > joke_2 = Joke.new({id: 2, question: "How do you keep a lion from charging?", answer: "Take away its credit cards."})
-# # => #<Joke:0x007fc87b135240 ...>
-#
 # > require './lib/user'
 # # => true
 #
-# > ilana = User.new("Ilana")
+# > casey = User.new("Casey")
 # # => #<User:0x007fc87c8f8aa8 ...>
 #
-# > josh = User.new("Josh")
-# # => #<User:0x007fc87cabfbe8 ...>
-#
-# > ilana.learn(joke_1)
-# > ilana.learn(joke_2)
-# > ilana.perform_routine_for(josh)
-# > josh.jokes
-# # => [#<Joke:0x007fc87b02c2e0 ...>, #<Joke:0x007fc87b135240 ...>]
-#
-# > josh.jokes.count
-# # => 2
+# > casey.learn_routine('./jokes.csv')
+# > casey.jokes.count
+# # => 100
