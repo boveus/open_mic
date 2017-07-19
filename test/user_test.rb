@@ -24,11 +24,17 @@ class UserTest < Minitest::Test
   end
 
   def test_user_has_no_jokes_by_default
+    sal = User.new("Sal")
 
+    assert_equal 0, sal.jokes.count
   end
 
   def test_user_can_learn_a_joke
+    sal = User.new("Sal")
+    joke = Joke.new({id: 1, question: "Why did the strawberry cross the road?", answer: "Because his mother was in a jam."})
+    sal.learn(joke)
 
+    assert_equal 1, sal.jokes.count
   end
 end
 
